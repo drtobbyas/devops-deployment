@@ -1,0 +1,11 @@
+global:
+  scrape_interval: 15s
+
+rule_files:
+  - "alerts.yml"
+
+scrape_configs:
+  - job_name: 'demo-app'
+    static_configs:
+      - targets: ['demo-app-service.default.svc.cluster.local:80']
+    metrics_path: /metrics

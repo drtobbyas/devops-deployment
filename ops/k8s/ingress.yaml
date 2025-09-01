@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: demo-app-ingress
+  annotations:
+    # This annotation is specific to NGINX Ingress Controller
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    cert-manager.io/cluster-issuer: letsencrypt-staging # Use letsencrypt-prod for production
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - assetrix.tobbyas.com
+    secretName: demo-app-tls # cert-manager will store the certificate in this secret
+  rules:
+  - host: assetrix.tobbyas.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: demo-app-service
+            port:
+              number: 80

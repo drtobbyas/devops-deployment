@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: demo-app-network-policy
+spec:
+  podSelector:
+    matchLabels:
+      app: demo-app
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    # Allow traffic from pods in the same namespace with the label 'app=ingress-nginx'
+    # This label should match your Ingress controller pods
+    - namespaceSelector:
+        matchLabels:
+          # This label should match the namespace of your Ingress controller
+          kubernetes.io/metadata.name: ingress-nginx
+      podSelector:
+        matchLabels:
+          app.kubernetes.io/name: ingress-nginx
+    ports:
+    - protocol: TCP
+      port: 8000

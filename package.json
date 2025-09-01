@@ -1,0 +1,32 @@
+{
+    "name": "assetrix-demo-app",
+    "version": "0.0.1",
+    "description": "Demo application for Assetrix DevOps assessment",
+    "main": "./src/index.js",
+    "type": "module",
+    "scripts": {
+      "start": "node ./src/index.js",
+      "start:dev": "nodemon ./src/index.js",
+      "test": "jest",
+      "test:watch": "jest --watch"
+    },
+    "author": "drtobbyas",
+    "license": "ISC",
+    "dependencies": {
+      "express": "^4.18.2",
+      "helmet": "^7.0.0",
+      "cors": "^2.8.5"
+    },
+    "devDependencies": {
+      "jest": "^29.6.2",
+      "supertest": "^6.3.3",
+      "nodemon": "^3.0.1"
+    },
+    "jest": {
+      "testEnvironment": "node",
+      "collectCoverageFrom": [
+        "*.js",
+        "!node_modules/**"
+      ]
+    }
+  }
